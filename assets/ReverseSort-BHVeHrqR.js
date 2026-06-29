@@ -1,0 +1,9 @@
+import{n as e}from"./rolldown-runtime-Bh1tDfsg.js";import{u as t}from"./router-B-JDBtYp.js";import{n}from"./animal-BWgbA56x.js";import{t as r}from"./ToolLayout-Cuv2Di9V.js";var i=e(t(),1),a=n(),o={"reverse-lines":`反转行`,"reverse-chars":`反转字符`,"sort-asc":`升序A-Z`,"sort-desc":`降序Z-A`,"sort-num":`数字排序`},s={padding:`8px 16px`,borderRadius:10,border:`1px solid var(--border-color)`,background:`var(--bg-card)`,color:`var(--text-primary)`,fontSize:13,fontWeight:600,cursor:`pointer`,fontFamily:`var(--font-sans)`,boxShadow:`0 2px 0 var(--border-color)`,transition:`all 150ms ease`},c={...s,background:`var(--color-blue)`,color:`#fff`,borderColor:`var(--color-blue)`};function l(){let[e,t]=(0,i.useState)(``),[n,l]=(0,i.useState)(``),[u,d]=(0,i.useState)(null),f=(0,i.useCallback)((e,t)=>{if(!e)return``;switch(t){case`reverse-lines`:return e.split(`
+`).reverse().join(`
+`);case`reverse-chars`:return e.split(``).reverse().join(``);case`sort-asc`:return e.split(`
+`).sort((e,t)=>e.localeCompare(t)).join(`
+`);case`sort-desc`:return e.split(`
+`).sort((e,t)=>t.localeCompare(e)).join(`
+`);case`sort-num`:{let t=e.split(`
+`),n=[],r=[];for(let e of t){let t=parseFloat(e);isNaN(t)?r.push(e):n.push({line:e,num:t})}return n.sort((e,t)=>e.num-t.num),[...n.map(e=>e.line),...r].join(`
+`)}default:return e}},[]),p=t=>{d(t),l(f(e,t))};return(0,a.jsx)(r,{toolId:`text-reverse-sort`,title:`文本反转排序工具`,description:`支持文本内容的反转、升序降序排列、数字排序等操作`,inputValue:e,onInputChange:e=>{t(e),u&&l(f(e,u))},outputValue:n,inputPlaceholder:`在此粘贴文本，每行一条...`,extraActions:(0,a.jsx)(a.Fragment,{children:Object.entries(o).map(([e,t])=>(0,a.jsx)(`button`,{style:u===e?c:s,onClick:()=>p(e),children:t},e))})})}export{l as default};

@@ -1,0 +1,35 @@
+import{n as e}from"./rolldown-runtime-Bh1tDfsg.js";import{u as t}from"./router-B-JDBtYp.js";import{n}from"./animal-BWgbA56x.js";import{t as r}from"./index-BtA5Iip7.js";var i=e(t(),1),a=n(),o={maxWidth:900,margin:`0 auto`},s={marginBottom:24},c={fontSize:28,fontWeight:800,color:`var(--text-primary)`,fontFamily:`var(--font-sans)`,marginBottom:8},l={fontSize:14,color:`var(--text-muted)`,fontFamily:`var(--font-sans)`,lineHeight:1.6},u={padding:`36px 32px`,borderRadius:16,border:`1px solid var(--border-light)`,background:`var(--bg-tool)`,textAlign:`center`,marginBottom:20},d={fontSize:26,fontWeight:700,color:`var(--text-primary)`,fontFamily:`"Noto Serif SC", var(--font-sans)`,lineHeight:2,marginBottom:16},f={fontSize:15,color:`var(--color-pink)`,fontFamily:`var(--font-sans)`,marginBottom:6},p={fontSize:14,color:`var(--text-muted)`,fontFamily:`var(--font-sans)`},m={padding:`10px 28px`,borderRadius:12,border:`1px solid var(--border-color)`,background:`var(--color-blue)`,color:`#fff`,fontSize:15,fontWeight:600,cursor:`pointer`,fontFamily:`var(--font-sans)`,boxShadow:`0 2px 0 #6a7fd0`},h={...m,background:`var(--bg-card)`,color:`var(--text-primary)`,borderColor:`var(--border-color)`,boxShadow:`0 2px 0 var(--border-color)`},g=[{verse:`床前明月光，疑是地上霜。
+举头望明月，低头思故乡。`,author:`李白`,source:`《静夜思》`},{verse:`春眠不觉晓，处处闻啼鸟。
+夜来风雨声，花落知多少。`,author:`孟浩然`,source:`《春晓》`},{verse:`白日依山尽，黄河入海流。
+欲穷千里目，更上一层楼。`,author:`王之涣`,source:`《登鹳雀楼》`},{verse:`锄禾日当午，汗滴禾下土。
+谁知盘中餐，粒粒皆辛苦。`,author:`李绅`,source:`《悯农》`},{verse:`红豆生南国，春来发几枝。
+愿君多采撷，此物最相思。`,author:`王维`,source:`《相思》`},{verse:`朝辞白帝彩云间，千里江陵一日还。
+两岸猿声啼不住，轻舟已过万重山。`,author:`李白`,source:`《早发白帝城》`},{verse:`两个黄鹂鸣翠柳，一行白鹭上青天。
+窗含西岭千秋雪，门泊东吴万里船。`,author:`杜甫`,source:`《绝句》`},{verse:`远上寒山石径斜，白云生处有人家。
+停车坐爱枫林晚，霜叶红于二月花。`,author:`杜牧`,source:`《山行》`},{verse:`清明时节雨纷纷，路上行人欲断魂。
+借问酒家何处有？牧童遥指杏花村。`,author:`杜牧`,source:`《清明》`},{verse:`故人西辞黄鹤楼，烟花三月下扬州。
+孤帆远影碧空尽，唯见长江天际流。`,author:`李白`,source:`《黄鹤楼送孟浩然之广陵》`},{verse:`日照香炉生紫烟，遥看瀑布挂前川。
+飞流直下三千尺，疑是银河落九天。`,author:`李白`,source:`《望庐山瀑布》`},{verse:`独在异乡为异客，每逢佳节倍思亲。
+遥知兄弟登高处，遍插茱萸少一人。`,author:`王维`,source:`《九月九日忆山东兄弟》`},{verse:`好雨知时节，当春乃发生。
+随风潜入夜，润物细无声。`,author:`杜甫`,source:`《春夜喜雨》`},{verse:`千山鸟飞绝，万径人踪灭。
+孤舟蓑笠翁，独钓寒江雪。`,author:`柳宗元`,source:`《江雪》`},{verse:`众鸟高飞尽，孤云独去闲。
+相看两不厌，只有敬亭山。`,author:`李白`,source:`《独坐敬亭山》`},{verse:`月落乌啼霜满天，江枫渔火对愁眠。
+姑苏城外寒山寺，夜半钟声到客船。`,author:`张继`,source:`《枫桥夜泊》`},{verse:`离离原上草，一岁一枯荣。
+野火烧不尽，春风吹又生。`,author:`白居易`,source:`《赋得古原草送别》`},{verse:`空山不见人，但闻人语响。
+返景入深林，复照青苔上。`,author:`王维`,source:`《鹿柴》`},{verse:`墙角数枝梅，凌寒独自开。
+遥知不是雪，为有暗香来。`,author:`王安石`,source:`《梅花》`},{verse:`鹅鹅鹅，曲项向天歌。
+白毛浮绿水，红掌拨清波。`,author:`骆宾王`,source:`《咏鹅》`},{verse:`大漠孤烟直，长河落日圆。
+萧关逢候骑，都护在燕然。`,author:`王维`,source:`《使至塞上》`},{verse:`横看成岭侧成峰，远近高低各不同。
+不识庐山真面目，只缘身在此山中。`,author:`苏轼`,source:`《题西林壁》`},{verse:`水光潋滟晴方好，山色空蒙雨亦奇。
+欲把西湖比西子，淡妆浓抹总相宜。`,author:`苏轼`,source:`《饮湖上初晴后雨》`},{verse:`爆竹声中一岁除，春风送暖入屠苏。
+千门万户曈曈日，总把新桃换旧符。`,author:`王安石`,source:`《元日》`},{verse:`京口瓜洲一水间，钟山只隔数重山。
+春风又绿江南岸，明月何时照我还？`,author:`王安石`,source:`《泊船瓜洲》`},{verse:`泉眼无声惜细流，树阴照水爱晴柔。
+小荷才露尖尖角，早有蜻蜓立上头。`,author:`杨万里`,source:`《小池》`},{verse:`毕竟西湖六月中，风光不与四时同。
+接天莲叶无穷碧，映日荷花别样红。`,author:`杨万里`,source:`《晓出净慈寺送林子方》`},{verse:`死去元知万事空，但悲不见九州同。
+王师北定中原日，家祭无忘告乃翁。`,author:`陆游`,source:`《示儿》`},{verse:`莫笑农家腊酒浑，丰年留客足鸡豚。
+山重水复疑无路，柳暗花明又一村。`,author:`陆游`,source:`《游山西村》`},{verse:`醉里挑灯看剑，梦回吹角连营。
+八百里分麾下炙，五十弦翻塞外声。
+沙场秋点兵。`,author:`辛弃疾`,source:`《破阵子》`},{verse:`枯藤老树昏鸦，小桥流水人家，
+古道西风瘦马。夕阳西下，断肠人在天涯。`,author:`马致远`,source:`《天净沙·秋思》`},{verse:`曾经沧海难为水，除却巫山不是云。
+取次花丛懒回顾，半缘修道半缘君。`,author:`元稹`,source:`《离思》`},{verse:`人生若只如初见，何事秋风悲画扇。
+等闲变却故人心，却道故人心易变。`,author:`纳兰性德`,source:`《木兰花令》`}];function _(){let[e,t]=(0,i.useState)(g[0]),n=(0,i.useCallback)(()=>{let n;do n=Math.floor(Math.random()*g.length);while(g.length>1&&g[n].verse===e.verse);t(g[n])},[e.verse]);return(0,a.jsxs)(`div`,{style:o,children:[(0,a.jsxs)(`div`,{style:s,children:[(0,a.jsx)(`h1`,{style:c,children:`随机一句诗词`}),(0,a.jsx)(`p`,{style:l,children:`随机展示中国古典诗词名句，附带作者、出处等信息`})]}),(0,a.jsxs)(`div`,{style:u,children:[(0,a.jsx)(`div`,{style:d,children:e.verse}),(0,a.jsxs)(`div`,{style:f,children:[`—— `,e.author]}),(0,a.jsx)(`div`,{style:p,children:e.source})]}),(0,a.jsxs)(`div`,{style:{display:`flex`,gap:12,justifyContent:`center`},children:[(0,a.jsx)(`button`,{style:m,onClick:n,children:`换一条`}),(0,a.jsx)(`button`,{style:h,onClick:async()=>{let t=`${e.verse}\n——${e.author} ${e.source}`;try{await navigator.clipboard.writeText(t),r(`已复制到剪贴板`,`success`)}catch{r(`复制失败`,`error`)}},children:`复制`})]})]})}export{_ as default};

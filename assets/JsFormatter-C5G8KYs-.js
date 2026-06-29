@@ -1,0 +1,8 @@
+import{n as e}from"./rolldown-runtime-Bh1tDfsg.js";import{u as t}from"./router-B-JDBtYp.js";import{n}from"./animal-BWgbA56x.js";import{t as r}from"./ToolLayout-Cuv2Di9V.js";var i=e(t(),1),a=n(),o={padding:`8px 16px`,borderRadius:10,border:`1px solid var(--border-color)`,background:`var(--bg-card)`,color:`var(--text-primary)`,fontSize:13,fontWeight:600,cursor:`pointer`,fontFamily:`var(--font-sans)`,boxShadow:`0 2px 0 var(--border-color)`};function s(e){let t=``,n=0,r=0;for(;r<e.length;){let i=e[r];if(i===`{`){for(t+=` {
+`,n++,r++;r<e.length&&/\s/.test(e[r]);)r++;continue}if(i===`}`){for(n=Math.max(0,n-1),t=t.trimEnd()+`
+`+`  `.repeat(n)+`}
+`,r++;r<e.length&&/\s/.test(e[r]);)r++;continue}if(i===`;`){for(t+=`;
+`+`  `.repeat(n),r++;r<e.length&&/\s/.test(e[r]);)r++;continue}t+=i,r++}return t.replace(/\n\s*\n/g,`
+`).replace(/;\s*}/g,`;
+}`).replace(/}\s*([^{])/g,`}
+$1`).trim()}function c(e){let t=e.replace(/\/\/.*$/gm,``);return t=t.replace(/\/\*[\s\S]*?\*\//g,``),t=t.replace(/\s+/g,` `),t=t.replace(/\s*{\s*/g,`{`),t=t.replace(/\s*}\s*/g,`}`),t=t.replace(/\s*;\s*/g,`;`),t=t.replace(/\s*\(\s*/g,`(`),t=t.replace(/\s*\)\s*/g,`)`),t=t.replace(/;\s*}/g,`}`),t.trim()}function l(){let[e,t]=(0,i.useState)(``),[n,l]=(0,i.useState)(``);return(0,a.jsx)(r,{toolId:`dev-js-formatter`,title:`JavaScript代码格式化`,description:`格式化JavaScript代码，支持美化和压缩两种模式`,inputValue:e,onInputChange:e=>{t(e),l(``)},outputValue:n,inputPlaceholder:`在此粘贴 JavaScript 代码...`,extraActions:(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(`button`,{style:o,onClick:()=>{e.trim()&&l(s(e))},children:`格式化`}),(0,a.jsx)(`button`,{style:o,onClick:()=>{e.trim()&&l(c(e))},children:`压缩`})]})})}export{l as default};

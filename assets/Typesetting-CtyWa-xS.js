@@ -1,0 +1,5 @@
+import{n as e}from"./rolldown-runtime-Bh1tDfsg.js";import{u as t}from"./router-B-JDBtYp.js";import{n}from"./animal-BWgbA56x.js";import{t as r}from"./ToolLayout-Cuv2Di9V.js";var i=e(t(),1),a=n();function o(e){if(!e)return``;let t=e;return t=t.replace(/([\u4e00-\u9fff\u3400-\u4dbf])([a-zA-Z])/g,`$1 $2`),t=t.replace(/([a-zA-Z])([\u4e00-\u9fff\u3400-\u4dbf])/g,`$1 $2`),t=t.replace(/([\u4e00-\u9fff\u3400-\u4dbf])(\d)/g,`$1 $2`),t=t.replace(/(\d)([\u4e00-\u9fff\u3400-\u4dbf])/g,`$1 $2`),t=t.replace(/\uFF0C/g,`,`),t=t.replace(/\uFF1A/g,`:`),t=t.replace(/\uFF1B/g,`;`),t=t.replace(/\uFF08/g,`(`),t=t.replace(/\uFF09/g,`)`),t=t.replace(/\uFF01/g,`!`),t=t.replace(/\uFF1F/g,`?`),t=t.replace(/\n{3,}/g,`
+
+`),t=t.split(`
+`).map(e=>e.trimEnd()).join(`
+`),t}function s(){let[e,t]=(0,i.useState)(``),[n,s]=(0,i.useState)(``);return(0,i.useEffect)(()=>{s(o(e))},[e]),(0,a.jsx)(r,{toolId:`text-typesetting`,title:`中英文排版纠正器`,description:`自动纠正中英文混排时的标点符号、空格等排版问题，符合排版规范`,inputValue:e,onInputChange:t,outputValue:n,inputPlaceholder:`在此粘贴中英文混排文本...`})}export{s as default};
