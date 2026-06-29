@@ -45,12 +45,15 @@ export default function ExchangeRate() {
     setOutput(fmt);
     if (f === t) {
       setRateUsed('同币种转换');
-    } else if (f === 'CNY') {
-      setRateUsed(`1 ${getCurrencyLabel(t)} = ${(currencyInfo['CNY'].rate / currencyInfo[t].rate).toFixed(4)} ${getCurrencyLabel('CNY')}`);
-    } else if (t === 'CNY') {
-      setRateUsed(`1 ${getCurrencyLabel(f)} = ${currencyInfo[f].rate.toFixed(4)} ${getCurrencyLabel('CNY')}`);
     } else {
-      setRateUsed(`1 ${getCurrencyLabel(f)} = ${(currencyInfo[f].rate / currencyInfo[t].rate).toFixed(4)} ${getCurrencyLabel(t)}`);
+      // 当 f 为 CNY 时，显示 1 t = ? CNY；否则显示 1 f = ? CNY
+      if (f === 'CNY') {
+        const rate = currencyInfo['CNY'].rate / currencyInfo[t].rate;
+        setRateUsed(`1 ${getCurrencyLabel(t)} = ${rate.toFixed(4)} ${getCurrencyLabel('CNY')}`);
+      } else {
+        const rate = currencyInfo[f].rate;
+        setRateUsed(`1 ${getCurrencyLabel(f)} = ${rate.toFixed(4)} ${getCurrencyLabel('CNY')}`);
+      }
     }
   }, []);
 
