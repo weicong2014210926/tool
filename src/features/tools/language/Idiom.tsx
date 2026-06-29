@@ -1,0 +1,121 @@
+import React, { useState } from 'react';
+import { showToast } from '../../../components/ui/Toast';
+
+const btnStyle: React.CSSProperties = { padding: '8px 16px', borderRadius: 10, border: '1px solid var(--border-color)', background: 'var(--bg-card)', color: 'var(--text-primary)', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-sans)', boxShadow: '0 2px 0 var(--border-color)', transition: 'all 150ms ease' };
+const inputStyle: React.CSSProperties = { padding: '8px 12px', borderRadius: 10, border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: 13, fontFamily: 'var(--font-sans)', outline: 'none', flex: 1 };
+const resultCard: React.CSSProperties = { padding: '20px 24px', borderRadius: 16, border: '1px solid var(--border-light)', background: 'var(--bg-tool)', marginBottom: 16 };
+const labelStyle: React.CSSProperties = { fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4, fontFamily: 'var(--font-sans)' };
+const tagStyle: React.CSSProperties = { display: 'inline-block', padding: '2px 10px', borderRadius: 6, fontSize: 12, border: '1px solid var(--border-light)', marginRight: 6, marginBottom: 4, fontFamily: 'var(--font-sans)' };
+const titleStyle: React.CSSProperties = { fontSize: 28, fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', marginBottom: 4 };
+const pinyinStyle: React.CSSProperties = { fontSize: 16, color: 'var(--color-pink)', fontFamily: 'var(--font-sans)', marginBottom: 12 };
+const descStyle: React.CSSProperties = { fontSize: 14, color: 'var(--text-primary)', lineHeight: 1.8, fontFamily: 'var(--font-sans)', marginBottom: 8 };
+
+interface IdiomData {
+  word: string; pinyin: string; meaning: string; source: string; example: string;
+  synonym: string[]; antonym: string[];
+}
+
+const IDIOMS: IdiomData[] = [
+  { word:'画蛇添足', pinyin:'huà shé tiān zú', meaning:'比喻做了多余的事，反而不好', source:'《战国策·齐策二》', example:'这篇文章已经很完美了，不需要再画蛇添足。', synonym:['多此一举','弄巧成拙'], antonym:['恰到好处','恰如其分'] },
+  { word:'守株待兔', pinyin:'shǒu zhū dài tù', meaning:'比喻死守经验，不知变通，也比喻妄想不劳而获', source:'《韩非子·五蠹》', example:'你不应该守株待兔，要主动去寻找机会。', synonym:['刻舟求剑','墨守成规'], antonym:['通权达变','随机应变'] },
+  { word:'亡羊补牢', pinyin:'wáng yáng bǔ láo', meaning:'在受到损失后及时想办法补救，免得以后再受损失', source:'《战国策·楚策四》', example:'虽然犯了错误，但亡羊补牢，为时未晚。', synonym:['见兔顾犬','知错就改'], antonym:['知错不改','执迷不悟'] },
+  { word:'掩耳盗铃', pinyin:'yǎn ěr dào líng', meaning:'比喻自己欺骗自己，明明掩盖不了的事情偏要设法掩盖', source:'《吕氏春秋·自知》', example:'你这样做简直是掩耳盗铃，迟早会被人发现的。', synonym:['自欺欺人','掩目捕雀'], antonym:['实事求是','开诚布公'] },
+  { word:'叶公好龙', pinyin:'yè gōng hào lóng', meaning:'比喻口头上说爱好某事物，实际上并不真的爱好', source:'《新序·杂事五》', example:'他说喜欢读书，却从来不看书，真是叶公好龙。', synonym:['口是心非','表里不一'], antonym:['名副其实','表里如一'] },
+  { word:'胸有成竹', pinyin:'xiōng yǒu chéng zhú', meaning:'比喻在做事之前已经拿定主意，有充分的把握', source:'苏轼《文与可画筼筜谷偃竹记》', example:'他对这个项目胸有成竹，大家都相信他能做好。', synonym:['成竹在胸','心中有数'], antonym:['心中无数','茫无头绪'] },
+  { word:'一鸣惊人', pinyin:'yī míng jīng rén', meaning:'比喻平时没有突出的表现，一下子做出惊人的成绩', source:'《史记·滑稽列传》', example:'他这次比赛一鸣惊人，获得了全国冠军。', synonym:['一举成名','一步登天'], antonym:['默默无闻','名落孙山'] },
+  { word:'画龙点睛', pinyin:'huà lóng diǎn jīng', meaning:'比喻在关键的地方用精辟的语句点明要旨，使内容更加生动', source:'张彦远《历代名画记》', example:'你最后那段总结真是画龙点睛之笔。', synonym:['锦上添花','点石成金'], antonym:['画蛇添足','弄巧成拙'] },
+  { word:'井底之蛙', pinyin:'jǐng dǐ zhī wā', meaning:'比喻目光短浅，见识狭隘的人', source:'《庄子·秋水》', example:'不要做井底之蛙，要多出去看看外面的世界。', synonym:['孤陋寡闻','坐井观天'], antonym:['见多识广','高瞻远瞩'] },
+  { word:'愚公移山', pinyin:'yú gōng yí shān', meaning:'比喻有顽强的毅力和不屈不挠的精神', source:'《列子·汤问》', example:'只要我们发扬愚公移山的精神，就没有克服不了的困难。', synonym:['锲而不舍','精卫填海'], antonym:['半途而废','有始无终'] },
+  { word:'精卫填海', pinyin:'jīng wèi tián hǎi', meaning:'比喻意志坚决、不畏艰难', source:'《山海经·北山经》', example:'他以精卫填海的精神坚持学习，最终取得了进步。', synonym:['愚公移山','矢志不移'], antonym:['半途而废','知难而退'] },
+  { word:'鹤立鸡群', pinyin:'hè lì jī qún', meaning:'比喻一个人的仪表或才能在周围人群中显得很突出', source:'刘义庆《世说新语·容止》', example:'他在这些学生中鹤立鸡群，成绩遥遥领先。', synonym:['出类拔萃','卓尔不群'], antonym:['相形见绌','平淡无奇'] },
+  { word:'杯弓蛇影', pinyin:'bēi gōng shé yǐng', meaning:'比喻因疑神疑鬼而自相惊扰', source:'应劭《风俗通义》', example:'你别杯弓蛇影了，那只是风吹动窗帘而已。', synonym:['草木皆兵','疑神疑鬼'], antonym:['处之泰然','安之若素'] },
+  { word:'对牛弹琴', pinyin:'duì niú tán qín', meaning:'比喻对不讲道理的人讲道理，也用来讽刺说话不看对象', source:'牟融《理惑论》', example:'跟他讲这些专业知识，简直是对牛弹琴。', synonym:['白费口舌','问道于盲'], antonym:['对症下药','有的放矢'] },
+  { word:'刻舟求剑', pinyin:'kè zhōu qiú jiàn', meaning:'比喻办事刻板，拘泥而不知变通', source:'《吕氏春秋·察今》', example:'情况变了还按老办法，这不是刻舟求剑吗？', synonym:['守株待兔','墨守成规'], antonym:['随机应变','见机行事'] },
+  { word:'狐假虎威', pinyin:'hú jiǎ hǔ wēi', meaning:'比喻依仗别人的势力来欺压人', source:'《战国策·楚策一》', example:'他不过是狐假虎威，靠他爸爸的权势罢了。', synonym:['狗仗人势','仗势欺人'], antonym:['独立自主','自力更生'] },
+  { word:'买椟还珠', pinyin:'mǎi dú huán zhū', meaning:'比喻没有眼光，取舍不当', source:'《韩非子·外储说左上》', example:'放着核心技术不要，只拿走了包装，真是买椟还珠。', synonym:['舍本逐末','本末倒置'], antonym:['去粗取精'] },
+  { word:'塞翁失马', pinyin:'sài wēng shī mǎ', meaning:'比喻暂时的损失也许能带来好处，坏事可能变成好事', source:'《淮南子·人间训》', example:'这次没考上，塞翁失马焉知非福，明年可能考得更好。', synonym:['因祸得福','失之东隅'], antonym:['乐极生悲'] },
+  { word:'望梅止渴', pinyin:'wàng méi zhǐ kě', meaning:'比喻用空想来安慰自己', source:'刘义庆《世说新语·假谲》', example:'光靠空想不行动，不过是望梅止渴罢了。', synonym:['画饼充饥','聊以自慰'], antonym:['实事求是'] },
+  { word:'班门弄斧', pinyin:'bān mén nòng fǔ', meaning:'比喻在行家面前卖弄本领，不自量力', source:'柳宗元《王氏伯仲唱和诗序》', example:'在专家面前讲这些，真是班门弄斧了。', synonym:['布鼓雷门'], antonym:['虚怀若谷','自知之明'] },
+  { word:'破釜沉舟', pinyin:'pò fǔ chén zhōu', meaning:'比喻下定决心，不顾一切干到底', source:'《史记·项羽本纪》', example:'我们这次必须破釜沉舟，全力以赴。', synonym:['背水一战','决一死战'], antonym:['犹豫不决','举棋不定'] },
+  { word:'卧薪尝胆', pinyin:'wò xīn cháng dǎn', meaning:'形容一个人忍辱负重，发愤图强，最终苦尽甘来', source:'《史记·越王勾践世家》', example:'他卧薪尝胆三年，终于考上了理想的大学。', synonym:['发愤图强','励精图治'], antonym:['自暴自弃','妄自菲薄'] },
+  { word:'三顾茅庐', pinyin:'sān gù máo lú', meaning:'比喻诚心诚意地一再邀请', source:'诸葛亮《出师表》', example:'老板三顾茅庐才请到他来公司任职。', synonym:['礼贤下士','求贤若渴'], antonym:['拒人千里'] },
+  { word:'闻鸡起舞', pinyin:'wén jī qǐ wǔ', meaning:'比喻有志报国的人及时奋起，也形容奋发有为', source:'《晋书·祖逖传》', example:'他每天闻鸡起舞，坚持晨跑锻炼。', synonym:['发愤图强','自强不息'], antonym:['苟且偷安','自暴自弃'] },
+];
+
+export default function Idiom() {
+  const [search, setSearch] = useState('');
+  const [result, setResult] = useState<IdiomData | null>(null);
+  const [error, setError] = useState('');
+
+  const handleSearch = () => {
+    const q = search.trim();
+    if (!q) { setError('请输入要查询的成语'); return; }
+    const found = IDIOMS.find(i => i.word === q || i.word.includes(q));
+    if (found) { setResult(found); setError(''); }
+    else { setError(`未找到成语"${q}"，请尝试其他关键词`); setResult(null); }
+  };
+
+  const handleRandom = () => {
+    const idx = Math.floor(Math.random() * IDIOMS.length);
+    setResult(IDIOMS[idx]);
+    setSearch(IDIOMS[idx].word);
+    setError('');
+  };
+
+  const headerStyle: React.CSSProperties = { marginBottom: 20 };
+  const pageTitle: React.CSSProperties = { fontSize: 28, fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', marginBottom: 8 };
+  const pageDesc: React.CSSProperties = { fontSize: 14, color: 'var(--text-muted)', fontFamily: 'var(--font-sans)', lineHeight: 1.6 };
+
+  return (
+    <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      <div style={headerStyle}>
+        <h1 style={pageTitle}>成语查询</h1>
+        <p style={pageDesc}>提供完整的成语词典查询功能，包含释义、出处、典故等详细信息</p>
+      </div>
+
+      <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
+        <input
+          style={inputStyle}
+          value={search}
+          onChange={e => { setSearch(e.target.value); setError(''); }}
+          onKeyDown={e => e.key === 'Enter' && handleSearch()}
+          placeholder="输入成语名称查询..."
+        />
+        <button style={{ ...btnStyle, background: 'var(--color-blue)', color: '#fff', borderColor: 'var(--color-blue)' }} onClick={handleSearch}>查询</button>
+        <button style={btnStyle} onClick={handleRandom}>随机</button>
+      </div>
+      {error && <div style={{ color: 'var(--color-red)', fontSize: 13, marginBottom: 12, fontFamily: 'var(--font-sans)' }}>{error}</div>}
+      {result && (
+        <div style={resultCard}>
+          <div style={titleStyle}>{result.word}</div>
+          <div style={pinyinStyle}>{result.pinyin}</div>
+          <div style={{ marginBottom: 8 }}>
+            <div style={labelStyle}>释义</div>
+            <div style={descStyle}>{result.meaning}</div>
+          </div>
+          <div style={{ marginBottom: 8 }}>
+            <div style={labelStyle}>出处</div>
+            <div style={descStyle}>{result.source}</div>
+          </div>
+          <div style={{ marginBottom: 8 }}>
+            <div style={labelStyle}>例句</div>
+            <div style={descStyle}>{result.example}</div>
+          </div>
+          <div style={{ marginBottom: 8 }}>
+            <div style={labelStyle}>近义词</div>
+            <div>{result.synonym.map(s => <span key={s} style={tagStyle}>{s}</span>)}</div>
+          </div>
+          <div>
+            <div style={labelStyle}>反义词</div>
+            <div>{result.antonym.map(a => <span key={a} style={tagStyle}>{a}</span>)}</div>
+          </div>
+        </div>
+      )}
+      {!result && !error && (
+        <div style={{ padding: '30px 20px', textAlign: 'center', color: 'var(--text-muted)', fontSize: 14, fontFamily: 'var(--font-sans)' }}>
+          请输入成语名称查询，或点击"随机"查看随机成语
+        </div>
+      )}
+    </div>
+  );
+}

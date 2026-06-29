@@ -1,0 +1,79 @@
+import React, { useState, useCallback } from 'react';
+
+const containerStyle: React.CSSProperties = { maxWidth: 900, margin: '0 auto' };
+const headerStyle: React.CSSProperties = { marginBottom: 24 };
+const pageTitle: React.CSSProperties = { fontSize: 28, fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', marginBottom: 8 };
+const pageDesc: React.CSSProperties = { fontSize: 14, color: 'var(--text-muted)', fontFamily: 'var(--font-sans)', lineHeight: 1.6 };
+const cardStyle: React.CSSProperties = { padding: '40px 36px', borderRadius: 20, border: '1px solid var(--border-light)', background: 'var(--bg-tool)', textAlign: 'center' as const, marginBottom: 20 };
+const enStyle: React.CSSProperties = { fontSize: 20, fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', lineHeight: 1.8, marginBottom: 12 };
+const cnStyle: React.CSSProperties = { fontSize: 16, color: 'var(--color-pink)', fontFamily: '"Noto Sans SC", var(--font-sans)', lineHeight: 1.8 };
+const btnStyle: React.CSSProperties = { padding: '10px 28px', borderRadius: 12, border: '1px solid var(--border-color)', background: 'var(--color-blue)', color: '#fff', fontSize: 15, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-sans)', boxShadow: '0 2px 0 #6a7fd0' };
+const badgeStyle = (level: string): React.CSSProperties => {
+  const colors: Record<string, string> = { easy: '#27ae60', medium: '#f39c12', hard: '#e74c3c' };
+  return { display: 'inline-block', padding: '4px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700, background: colors[level] || '#666', color: '#fff', fontFamily: 'var(--font-sans)', marginBottom: 16 };
+};
+
+interface Sentence { en: string; cn: string; level: 'easy' | 'medium' | 'hard'; }
+
+const SENTENCES: Sentence[] = [
+  { en:'The weather is beautiful today.', cn:'今天天气真好。', level:'easy' },
+  { en:'I like to read books in my free time.', cn:'我喜欢在空闲时间读书。', level:'easy' },
+  { en:'She goes to school by bus every day.', cn:'她每天坐公交车去上学。', level:'easy' },
+  { en:'Could you please pass me the salt?', cn:'请把盐递给我好吗？', level:'easy' },
+  { en:'My favorite color is blue.', cn:'我最喜欢的颜色是蓝色。', level:'easy' },
+  { en:'What time does the movie start?', cn:'电影几点开始？', level:'easy' },
+  { en:'I had a wonderful time at the party.', cn:'我在派对上玩得很开心。', level:'easy' },
+  { en:'Practice makes perfect.', cn:'熟能生巧。', level:'easy' },
+  { en:'Actions speak louder than words.', cn:'行动胜于言语。', level:'easy' },
+  { en:'Every coin has two sides.', cn:'凡事都有两面性。', level:'easy' },
+  { en:'The early bird catches the worm.', cn:'早起的鸟儿有虫吃。', level:'medium' },
+  { en:'She has been studying English for three years.', cn:'她已经学了三年英语了。', level:'medium' },
+  { en:'If I had enough money, I would travel around the world.', cn:'如果我有足够的钱，我会环游世界。', level:'medium' },
+  { en:'The book that you lent me is really interesting.', cn:'你借给我的那本书真的很有趣。', level:'medium' },
+  { en:'It is said that laughter is the best medicine.', cn:'据说笑是最好的良药。', level:'medium' },
+  { en:'Never judge a book by its cover.', cn:'切勿以貌取人。', level:'medium' },
+  { en:'A journey of a thousand miles begins with a single step.', cn:'千里之行，始于足下。', level:'medium' },
+  { en:'Technology has dramatically changed our way of life.', cn:'科技极大地改变了我们的生活方式。', level:'medium' },
+  { en:'We should protect the environment for future generations.', cn:'我们应该为后代保护环境。', level:'medium' },
+  { en:'Not all who wander are lost.', cn:'并非所有流浪者都迷失了方向。', level:'medium' },
+  { en:'The only limit to our realization of tomorrow is our doubts of today.', cn:'实现明天理想的唯一障碍是今天的疑虑。', level:'hard' },
+  { en:'It is during our darkest moments that we must focus to see the light.', cn:'正是在最黑暗的时刻，我们必须集中精神才能看到光明。', level:'hard' },
+  { en:'In the middle of difficulty lies opportunity.', cn:'在困难的中心蕴藏着机遇。', level:'hard' },
+  { en:'The significant problems we face cannot be solved at the same level of thinking we were at when we created them.', cn:'我们面临的重大问题，无法用当初创造它们时的思维水平来解决。', level:'hard' },
+  { en:'What lies behind us and what lies before us are tiny matters compared to what lies within us.', cn:'与我们内心相比，身后和眼前的事都是微不足道的。', level:'hard' },
+  { en:'Circumstances do not make the man; they reveal him.', cn:'环境不能造就一个人，它只能揭示一个人。', level:'hard' },
+  { en:'The greatest glory in living lies not in never falling, but in rising every time we fall.', cn:'生命中最伟大的光辉不在于永不跌倒，而在于每次跌倒后都能重新站起来。', level:'hard' },
+  { en:'To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.', cn:'在一个不断试图改变你的世界里做自己，就是最大的成就。', level:'hard' },
+  { en:'We are what we repeatedly do. Excellence, then, is not an act, but a habit.', cn:'我们重复做什么，就会成为什么样的人。卓越不是一种行为，而是一种习惯。', level:'hard' },
+  { en:'Success is not final, failure is not fatal: it is the courage to continue that counts.', cn:'成功不是终点，失败也不致命：重要的是继续前进的勇气。', level:'hard' },
+];
+
+export default function RandomEn() {
+  const [sentence, setSentence] = useState(SENTENCES[0]);
+
+  const refresh = useCallback(() => {
+    let idx: number;
+    do { idx = Math.floor(Math.random() * SENTENCES.length); }
+    while (SENTENCES.length > 1 && SENTENCES[idx].en === sentence.en);
+    setSentence(SENTENCES[idx]);
+  }, [sentence.en]);
+
+  const levelLabel: Record<string, string> = { easy: '初级', medium: '中级', hard: '高级' };
+
+  return (
+    <div style={containerStyle}>
+      <div style={headerStyle}>
+        <h1 style={pageTitle}>随机英语句子</h1>
+        <p style={pageDesc}>随机生成英语句子，适用于英语学习、写作灵感和日常练习</p>
+      </div>
+      <div style={cardStyle}>
+        <div style={badgeStyle(sentence.level)}>{levelLabel[sentence.level]}</div>
+        <div style={enStyle}>{sentence.en}</div>
+        <div style={cnStyle}>{sentence.cn}</div>
+      </div>
+      <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+        <button style={btnStyle} onClick={refresh}>换一条</button>
+      </div>
+    </div>
+  );
+}

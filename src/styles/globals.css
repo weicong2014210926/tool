@@ -1,0 +1,201 @@
+/* ============================================
+   Global Styles — 实用工具 (utility-tools)
+   Based on animal-island-ui design tokens
+   ============================================ */
+
+/* ---------- CSS Variables (Light Theme) ---------- */
+:root {
+  /* Page Background */
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #f7f3df;
+  --bg-card: #ffffff;
+  --bg-tool: #faf8f3;
+
+  /* Text */
+  --text-primary: #725d42;
+  --text-secondary: #8b7355;
+  --text-muted: #b8a88a;
+  --text-accent: #f5a623;
+
+  /* Border */
+  --border-color: #d4c9b5;
+  --border-light: #e8e0d0;
+
+  /* Brand colors (NookPhone palette) */
+  --color-pink: #f8a6b2;
+  --color-purple: #b77dee;
+  --color-blue: #889df0;
+  --color-yellow: #f7cd67;
+  --color-orange: #e59266;
+  --color-teal: #82d5bb;
+  --color-green: #8ac68a;
+  --color-red: #fc736d;
+  --color-lime: #d1da49;
+  --color-yellow-green: #ecdf52;
+  --color-brown: #9a835a;
+  --color-peach: #e18c6f;
+
+  /* Surfaces */
+  --surface-glass: rgba(247, 243, 223, 0.6);
+  --surface-elevated: #ffffff;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Nav */
+  --nav-width: 220px;
+  --nav-collapsed-width: 56px;
+  --header-height: 56px;
+
+  /* Transition */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Font */
+  --font-sans: 'Nunito', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ---------- Dark Theme ---------- */
+.dark {
+  --bg-primary: #2b2118;
+  --bg-secondary: #3d3028;
+  --bg-card: #3d3028;
+  --bg-tool: #342a20;
+
+  --text-primary: #e8dcc8;
+  --text-secondary: #c4b59a;
+  --text-muted: #8b7355;
+  --text-accent: #f7cd67;
+
+  --border-color: #5a4a38;
+  --border-light: #4a3c2e;
+
+  --surface-glass: rgba(61, 48, 40, 0.6);
+  --surface-elevated: #4a3c2e;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+::selection {
+  background-color: var(--color-blue);
+  color: #fff;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ---------- Utility Classes ---------- */
+.glass-panel {
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-pink), var(--color-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- Toast Animation ---------- */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-8px) scale(0.95); }
+}
+
+/* ---------- Skeleton Loading ---------- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--border-light) 25%, var(--bg-secondary) 50%, var(--border-light) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Magnetic Hover (premium micro-interaction) ---------- */
+.magnetic {
+  transition: transform var(--transition-slow);
+}
+
+.magnetic:hover {
+  transform: scale(1.03) translateY(-2px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  /* Sidebar is overlay on mobile — nav-width stays 220px so the sidebar
+     component itself renders at full width inside its transform container */
+  .sidebar {
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Show hamburger button on mobile */
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}

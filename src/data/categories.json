@@ -1,0 +1,12 @@
+[
+  { "slug": "text",       "name": "文本工具",   "icon": "icon-chat",      "color": "app-blue",   "description": "文本编辑、数据清洗、内容排版" },
+  { "slug": "language",   "name": "语言工具",   "icon": "icon-chat",      "color": "app-pink",   "description": "语言转换、字词查询、文案素材" },
+  { "slug": "finance",    "name": "财务工具",   "icon": "icon-shopping", "color": "app-yellow", "description": "财务计算、税务处理、货币换算" },
+  { "slug": "datetime",   "name": "日期时间",   "icon": "icon-camera",   "color": "app-teal",   "description": "日期计算、历法转换、时间工具" },
+  { "slug": "convert",    "name": "换算工具",   "icon": "icon-diy",      "color": "app-orange", "description": "单位换算、进制转换、坐标系换算" },
+  { "slug": "image",      "name": "图像工具",   "icon": "icon-camera",   "color": "purple",     "description": "图片处理、二维码、条形码生成" },
+  { "slug": "life",       "name": "便民查询",   "icon": "icon-map",      "color": "app-green",  "description": "生活实用信息查询与计算" },
+  { "slug": "devtools",   "name": "开发工具",   "icon": "icon-design",   "color": "brown",      "description": "代码格式化、正则测试、命名转换" },
+  { "slug": "codec",      "name": "编码解码",   "icon": "icon-variant",  "color": "warm-peach-pink", "description": "加密、编码转换、密码生成" },
+  { "slug": "network",    "name": "网络工具",   "icon": "icon-helicopter", "color": "lime-green", "description": "IP查询、域名信息、网络辅助" }
+]

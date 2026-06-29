@@ -1,0 +1,88 @@
+import React, { useState } from 'react';
+
+const btnPrimary: React.CSSProperties = { padding: '8px 16px', borderRadius: 10, border: '1px solid var(--color-blue)', background: 'var(--color-blue)', color: '#fff', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-sans)', boxShadow: '0 2px 0 var(--border-color)', transition: 'all 150ms ease' };
+const labelStyle: React.CSSProperties = { fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4, fontFamily: 'var(--font-sans)' };
+const tableCell: React.CSSProperties = { padding: '8px 12px', borderBottom: '1px solid var(--border-light)', fontSize: 13 };
+const selectStyle: React.CSSProperties = { padding: '8px 12px', borderRadius: 10, border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: 13, fontFamily: 'var(--font-sans)', outline: 'none', cursor: 'pointer' };
+
+const containerStyle: React.CSSProperties = { maxWidth: 900, margin: '0 auto' };
+const headerStyle: React.CSSProperties = { marginBottom: 24 };
+const h1Style: React.CSSProperties = { fontSize: 28, fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', marginBottom: 8 };
+const descStyle: React.CSSProperties = { fontSize: 14, color: 'var(--text-muted)', fontFamily: 'var(--font-sans)', lineHeight: 1.6 };
+const thStyle: React.CSSProperties = { ...tableCell, fontWeight: 700, color: 'var(--text-secondary)', textAlign: 'left' as const, background: 'var(--bg-tool)' };
+const noteStyle: React.CSSProperties = { marginTop: 16, padding: 12, borderRadius: 10, background: 'var(--bg-tool)', border: '1px solid var(--border-light)', fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-sans)' };
+
+const oilData: { province: string; r92: number; r95: number; r98: number; diesel: number }[] = [
+  { province: '北京', r92: 7.93, r95: 8.44, r98: 9.94, diesel: 7.64 },
+  { province: '上海', r92: 7.89, r95: 8.39, r98: 9.89, diesel: 7.57 },
+  { province: '天津', r92: 7.93, r95: 8.38, r98: 9.88, diesel: 7.60 },
+  { province: '重庆', r92: 8.00, r95: 8.45, r98: 9.52, diesel: 7.66 },
+  { province: '广东', r92: 7.95, r95: 8.61, r98: 10.61, diesel: 7.60 },
+  { province: '浙江', r92: 7.90, r95: 8.40, r98: 9.90, diesel: 7.58 },
+  { province: '江苏', r92: 7.90, r95: 8.40, r98: 9.90, diesel: 7.56 },
+  { province: '山东', r92: 7.89, r95: 8.46, r98: 9.18, diesel: 7.51 },
+  { province: '河北', r92: 7.93, r95: 8.38, r98: 9.20, diesel: 7.60 },
+  { province: '河南', r92: 7.93, r95: 8.47, r98: 9.12, diesel: 7.58 },
+  { province: '湖北', r92: 7.94, r95: 8.49, r98: 9.73, diesel: 7.58 },
+  { province: '湖南', r92: 7.88, r95: 8.38, r98: 9.18, diesel: 7.66 },
+  { province: '四川', r92: 8.02, r95: 8.57, r98: 9.31, diesel: 7.64 },
+  { province: '福建', r92: 7.89, r95: 8.42, r98: 9.92, diesel: 7.59 },
+  { province: '安徽', r92: 7.89, r95: 8.44, r98: 9.64, diesel: 7.63 },
+  { province: '辽宁', r92: 7.89, r95: 8.41, r98: 9.16, diesel: 7.49 },
+  { province: '陕西', r92: 7.81, r95: 8.25, r98: 10.83, diesel: 7.48 },
+  { province: '云南', r92: 8.07, r95: 8.66, r98: 9.34, diesel: 7.66 },
+  { province: '贵州', r92: 8.06, r95: 8.51, r98: 9.41, diesel: 7.69 },
+  { province: '海南', r92: 9.04, r95: 9.60, r98: 10.87, diesel: 7.68 },
+];
+
+export default function OilPrice() {
+  const [selected, setSelected] = useState('');
+
+  const data = selected ? oilData.filter((d) => d.province === selected) : oilData;
+
+  return (
+    <div style={containerStyle}>
+      <div style={headerStyle}>
+        <h1 style={h1Style}>油价查询</h1>
+        <p style={descStyle}>查询全国各省份92号、95号、98号汽油和0号柴油参考价格</p>
+      </div>
+      <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end', marginBottom: 16, flexWrap: 'wrap' }}>
+        <div>
+          <div style={labelStyle}>选择省份</div>
+          <select style={{ ...selectStyle, minWidth: 160 }} value={selected} onChange={(e) => setSelected(e.target.value)}>
+            <option value="">全部省份</option>
+            {oilData.map((d) => <option key={d.province} value={d.province}>{d.province}</option>)}
+          </select>
+        </div>
+        {selected && <button style={btnPrimary} onClick={() => setSelected('')}>显示全部</button>}
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              <th style={thStyle}>省份</th>
+              <th style={thStyle}>92# 汽油</th>
+              <th style={thStyle}>95# 汽油</th>
+              <th style={thStyle}>98# 汽油</th>
+              <th style={thStyle}>0# 柴油</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((d) => (
+              <tr key={d.province}>
+                <td style={{ ...tableCell, fontWeight: 600 }}>{d.province}</td>
+                <td style={{ ...tableCell, fontFamily: 'var(--font-mono)', color: 'var(--color-red)' }}>{d.r92.toFixed(2)}</td>
+                <td style={{ ...tableCell, fontFamily: 'var(--font-mono)' }}>{d.r95.toFixed(2)}</td>
+                <td style={{ ...tableCell, fontFamily: 'var(--font-mono)' }}>{d.r98.toFixed(2)}</td>
+                <td style={{ ...tableCell, fontFamily: 'var(--font-mono)' }}>{d.diesel.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style={noteStyle}>
+        数据仅供参考，以加油站实时价格为准 | 更新日期：2025年6月
+      </div>
+    </div>
+  );
+}

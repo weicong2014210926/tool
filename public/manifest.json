@@ -1,0 +1,10 @@
+{
+  "name": "实用工具 - 一站式在线效率工具平台",
+  "short_name": "实用工具",
+  "description": "110+在线工具，文本处理/编码解码/财务计算/日期换算/开发辅助",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f0e8",
+  "theme_color": "#889df0",
+  "icons": [{ "src": "/favicon.svg", "sizes": "64x64", "type": "image/svg+xml" }]
+}

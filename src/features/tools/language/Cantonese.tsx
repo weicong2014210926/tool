@@ -1,0 +1,129 @@
+import React, { useState, useCallback } from 'react';
+import ToolLayout from '../../../layouts/ToolLayout';
+
+const btnStyle: React.CSSProperties = { padding: '8px 16px', borderRadius: 10, border: '1px solid var(--border-color)', background: 'var(--bg-card)', color: 'var(--text-primary)', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-sans)', boxShadow: '0 2px 0 var(--border-color)', transition: 'all 150ms ease' };
+const primaryBtn: React.CSSProperties = { ...btnStyle, background: 'var(--color-blue)', color: '#fff', borderColor: 'var(--color-blue)' };
+
+const JYUTPING: Record<string, string> = {
+  我:'ngo5',你:'nei5',佢:'keoi5',係:'hai6',唔:'m4',嘅:'ge3',咗:'zo2',
+  會:'wui5',人:'jan4',有:'jau5',冇:'mou5',去:'heoi3',來:'loi4',返:'faan1',
+  食:'sik6',飲:'jam2',睇:'tai2',聽:'teng1',講:'gong2',做:'zou6',想:'soeng2',
+  知:'zi1',話:'waa6',好:'hou2',大:'daai6',小:'siu2',多:'do1',少:'siu2',
+  新:'san1',舊:'gau6',高:'gou1',低:'dai1',快:'faai3',慢:'maan6',熱:'jit6',
+  凍:'dung3',上:'soeng5',下:'haa6',左:'zo2',右:'jau6',前:'cin4',後:'hau6',
+  一:'jat1',二:'ji6',三:'saam1',四:'sei3',五:'ng5',六:'luk6',七:'cat1',
+  八:'baat3',九:'gau2',十:'sap6',百:'baak3',千:'cin1',萬:'maan6',億:'jik1',
+  中:'zung1',國:'gwok3',香:'hoeng1',港:'gong2',廣:'gwong2',東:'dung1',
+  西:'sai1',南:'naam4',北:'bak1',天:'tin1',地:'dei6',水:'seoi2',火:'fo2',
+  風:'fung1',山:'saan1',海:'hoi2',河:'ho4',花:'faa1',草:'cou2',樹:'syu6',
+  日:'jat6',月:'jyut6',星:'sing1',明:'ming4',光:'gwong1',暗:'am3',
+  男:'naam4',老:'lou5',細:'sai3',父:'fu6',母:'mou5',仔:'zai2',
+  哥:'go1',弟:'dai6',姐:'ze2',妹:'mui6',朋:'pang4',友:'jau5',
+  家:'gaa1',屋:'uk1',門:'mun4',窗:'coeng1',床:'cong4',檯:'toi2',椅:'ji2',
+  書:'syu1',筆:'bat1',紙:'zi2',字:'zi6',學:'hok6',讀:'duk6',寫:'se2',
+  買:'maai5',賣:'maai6',錢:'cin2',貴:'gwai3',平:'peng4',價:'gaa3',
+  心:'sam1',頭:'tau4',手:'sau2',腳:'goek3',眼:'ngaan5',耳:'ji5',口:'hau2',
+  鼻:'bei6',面:'min6',身:'san1',肚:'tou5',病:'beng6',藥:'joek6',
+  貓:'maau1',狗:'gau2',雞:'gai1',魚:'jyu2',牛:'ngau4',豬:'zyu1',馬:'maa5',
+  鳥:'niu5',蟲:'cung4',龍:'lung4',虎:'fu2',蛇:'se4',兔:'tou3',羊:'joeng4',
+  紅:'hung4',黃:'wong4',藍:'laam4',白:'baak6',黑:'hak1',綠:'luk6',
+  早:'zou2',晚:'maan5',今:'gam1',昨:'zok6',年:'nin4',
+  點:'dim2',鐘:'zung1',分:'fan1',秒:'miu5',時:'si4',候:'hau6',
+  車:'ce1',船:'syun4',機:'gei1',飛:'fei1',行:'haang4',走:'zau2',路:'lou6',
+  街:'gaai1',市:'si5',區:'keoi1',樓:'lau4',
+  開:'hoi1',關:'gwaan1',打:'daa2',出:'ceot1',入:'jap6',到:'dou3',
+  愛:'oi3',恨:'han6',喜:'hei2',怒:'nou6',樂:'lok6',悲:'bei1',驚:'geng1',
+  謝:'ze6',對:'deoi3',錯:'co3',真:'zan1',假:'gaa2',長:'coeng4',短:'dyun2',
+  重:'cung5',輕:'heng1',肥:'fei4',瘦:'sau3',靚:'leng3',醜:'cau2',
+  甜:'tim4',苦:'fu2',酸:'syun1',辣:'laat6',鹹:'haam4',淡:'taam5',
+  條:'tiu4',個:'go3',張:'zoeng1',隻:'zek3',間:'gaan1',件:'gin6',
+  睇書:'tai2 syu1',飲茶:'jam2 caa4',食飯:'sik6 faan6',瞓覺:'fan3 gaau3',
+  返工:'faan1 gung1',放工:'fong3 gung1',行街:'haang4 gaai1',
+  今日:'gam1 jat6',聽日:'ting1 jat6',尋日:'cam4 jat6',琴日:'kam4 jat6',
+  上午:'soeng6 ng5',下午:'haa6 ng5',夜晚:'je6 maan5',朝早:'ziu1 zou2',
+  香港:'hoeng1 gong2',九龍:'gau2 lung4',新界:'san1 gaai3',
+  廣州:'gwong2 zau1',深圳:'sam1 zan3',北京:'bak1 ging1',上海:'soeng6 hoi2',
+  喜歡:'hei2 fun1',知道:'zi1 dou3',覺得:'gok3 dak1',以為:'ji5 wai4',
+  因為:'jan1 wai6',所以:'so2 ji5',如果:'jyu4 gwo2',可能:'ho2 nang4',
+  問題:'man6 tai4',辦法:'baan6 faat3',時間:'si4 gaan3',地方:'dei6 fong1',
+  老師:'lou5 si1',學生:'hok6 saang1',同學:'tung4 hok6',醫生:'ji1 sang1',
+  電車:'din6 ce1',地鐵:'dei6 tit3',巴士:'baa1 si2',的士:'dik1 si2',
+  電影:'din6 jing2',音樂:'jam1 ngok6',電視:'din6 si6',手機:'sau2 gei1',
+  電腦:'din6 nou5',上網:'soeng5 mong5',遊戲:'jau4 hei3',
+  中文:'zung1 man2',英文:'jing1 man2',普通話:'pou2 tung1 waa2',
+  工作:'gung1 zok3',學習:'hok6 zaap6',生活:'sang1 wut6',開心:'hoi1 sam1',
+};
+
+export default function Cantonese() {
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
+
+  const handleConvert = useCallback(() => {
+    if (!input.trim()) { setOutput(''); return; }
+    const lines = input.split('\n');
+    const result = lines.map(line => {
+      // Try longer phrases first
+      let i = 0;
+      const parts: string[] = [];
+      while (i < line.length) {
+        let matched = false;
+        for (let len = Math.min(4, line.length - i); len >= 1; len--) {
+          const seg = line.slice(i, i + len);
+          if (JYUTPING[seg]) {
+            parts.push(JYUTPING[seg]);
+            i += len;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          parts.push(line[i]);
+          i++;
+        }
+      }
+      return parts.join(' ');
+    });
+    setOutput(result.join('\n'));
+  }, [input]);
+
+  const handleInput = (value: string) => {
+    setInput(value);
+    if (value.trim()) {
+      // auto-convert
+      const lines = value.split('\n');
+      const result = lines.map(line => {
+        let i = 0;
+        const parts: string[] = [];
+        while (i < line.length) {
+          let matched = false;
+          for (let len = Math.min(4, line.length - i); len >= 1; len--) {
+            const seg = line.slice(i, i + len);
+            if (JYUTPING[seg]) {
+              parts.push(JYUTPING[seg]);
+              i += len;
+              matched = true;
+              break;
+            }
+          }
+          if (!matched) { parts.push(line[i]); i++; }
+        }
+        return parts.join(' ');
+      });
+      setOutput(result.join('\n'));
+    } else {
+      setOutput('');
+    }
+  };
+
+  return (
+    <ToolLayout
+      toolId="lang-cantonese"
+      title="粤语拼音转换"
+      description="将中文汉字转换为粤语拼音（Jyutping），方便粤语学习者和使用者"
+      inputValue={input}
+      onInputChange={handleInput}
+      outputValue={output}
+      inputPlaceholder="在此输入中文（支持粤语常用字）..."
+    />
+  );
+}
