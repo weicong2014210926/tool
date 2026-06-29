@@ -196,8 +196,7 @@ export default function PasswordGen() {
       toolId="codec-password-gen"
       title="随机密码生成"
       description="生成指定长度和复杂度的随机密码，使用 crypto.getRandomValues 保证真随机性"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
       children={controls}
     />

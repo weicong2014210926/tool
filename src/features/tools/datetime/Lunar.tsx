@@ -143,10 +143,8 @@ export default function Lunar() {
       toolId="date-lunar"
       title="农历公历转换"
       description="实现农历和公历日期之间的相互转换，支持干支纪年和生肖查询"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={{ marginBottom: 20 }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4, fontFamily: 'var(--font-sans)' }}>选择日期</div>

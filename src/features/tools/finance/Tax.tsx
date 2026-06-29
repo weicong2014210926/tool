@@ -46,10 +46,8 @@ export default function Tax() {
       toolId="fin-tax"
       title="税金税率计算器"
       description="计算各类税金的应缴税额，支持含税价和不含税价两种模式"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output ? '' : ''}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>金额</div>

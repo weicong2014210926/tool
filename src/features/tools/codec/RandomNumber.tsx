@@ -174,8 +174,7 @@ export default function RandomNumber() {
       toolId="codec-random-number"
       title="随机数生成器"
       description="在指定范围内生成随机整数，支持批量生成和去重选项，使用 crypto.getRandomValues 确保随机性"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
       children={controls}
     />

@@ -102,10 +102,8 @@ export default function Almanac() {
       toolId="date-almanac"
       title="农历老黄历查询"
       description="查询每日的老黄历信息，包括宜忌、冲煞等传统内容"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={{ marginBottom: 20 }}>
         <div style={labelStyle}>选择日期</div>

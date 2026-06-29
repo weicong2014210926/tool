@@ -75,10 +75,8 @@ export default function Radix() {
       toolId="conv-radix"
       title="进制转换器"
       description="在二进制、八进制、十进制、十六进制等不同进制之间进行数值转换"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
       error={error}
     >
       <div style={sectionStyle}>

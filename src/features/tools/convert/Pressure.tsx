@@ -38,10 +38,8 @@ export default function Pressure() {
       toolId="conv-pressure"
       title="压力单位换算"
       description="在帕斯卡、巴、大气压、毫米汞柱、psi等压力单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

@@ -35,10 +35,8 @@ export default function Density() {
       toolId="conv-density"
       title="密度单位换算"
       description="在kg/m³、g/cm³、lb/ft³等密度单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

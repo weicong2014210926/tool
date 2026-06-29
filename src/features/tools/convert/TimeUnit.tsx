@@ -39,10 +39,8 @@ export default function TimeUnit() {
       toolId="conv-time-unit"
       title="时间单位换算"
       description="在秒、分、时、天、周、月、年等时间单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

@@ -108,10 +108,8 @@ export default function Coords() {
       toolId="conv-coords"
       title="地理坐标系转换"
       description="在WGS84、GCJ02、BD09坐标系之间进行经纬度转换"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>经纬度</div>

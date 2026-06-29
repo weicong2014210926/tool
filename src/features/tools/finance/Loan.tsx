@@ -47,9 +47,16 @@ export default function Loan() {
       }
       // Last month
       if (totalMonths > 12) {
-        const lastPmt = monthlyPayment;
-        const lastInt = lastPmt * monthlyRate;
-        const lastPrin = lastPmt - lastInt;
+        // Recalculate balance before last month
+        let bal = principal;
+        for (let i = 1; i < totalMonths; i++) {
+          const int = bal * monthlyRate;
+          bal -= (monthlyPayment - int);
+        }
+        const lastBal = Math.max(0, bal);
+        const lastInt = lastBal * monthlyRate;
+        const lastPrin = lastBal;
+        const lastPmt = lastPrin + lastInt;
         table.push({ month: totalMonths, payment: lastPmt, principal: lastPrin, interest: lastInt, balance: 0 });
       }
     } else {
@@ -81,10 +88,8 @@ export default function Loan() {
       toolId="fin-loan"
       title="贷款计算器"
       description="计算住房贷款、消费贷款等各类贷款的月供、利息和还款计划"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <div style={sectionStyle}>

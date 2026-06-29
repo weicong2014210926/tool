@@ -40,10 +40,8 @@ export default function Volume() {
       toolId="conv-volume"
       title="体积单位换算"
       description="在立方米、升、毫升、加仑、品脱等体积和容积单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

@@ -65,10 +65,8 @@ export default function Timestamp() {
       toolId="date-timestamp"
       title="时间戳转换"
       description="在Unix时间戳和可读日期时间格式之间进行相互转换"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       {/* Timestamp to Date */}
       <div style={sectionStyle}>

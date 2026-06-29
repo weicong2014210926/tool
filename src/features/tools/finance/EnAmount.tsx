@@ -73,10 +73,8 @@ export default function EnAmount() {
       toolId="fin-en-amount"
       title="英文金额大写转换"
       description="将数字金额转换为英文大写金额格式，适用于国际结算和英文合同"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入金额</div>

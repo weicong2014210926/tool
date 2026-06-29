@@ -46,10 +46,8 @@ export default function Contract() {
       toolId="fin-contract"
       title="合同款项计算器"
       description="计算合同中分期付款的每期金额，支持自定义比例分配"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>合同总金额</div>

@@ -55,10 +55,8 @@ export default function Expiry() {
       toolId="date-expiry"
       title="保质期计算器"
       description="根据生产日期和保质期限计算食品、药品等物品的到期日期"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>生产日期 & 保质期</div>

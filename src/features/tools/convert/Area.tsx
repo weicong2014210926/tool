@@ -41,10 +41,8 @@ export default function Area() {
       toolId="conv-area"
       title="面积单位换算"
       description="在平方米、平方公里、公顷、亩、平方英尺等面积单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

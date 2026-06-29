@@ -47,10 +47,8 @@ export default function EnFormat() {
       toolId="date-en-format"
       title="英文日期格式转换"
       description="将日期转换为英文书写的多种格式，包括美式和英式日期写法"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={{ marginBottom: 20 }}>
         <div style={labelStyle}>选择日期</div>

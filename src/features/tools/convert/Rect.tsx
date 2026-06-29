@@ -51,10 +51,8 @@ export default function Rect() {
       toolId="conv-rect"
       title="矩形方体计算"
       description="计算矩形、长方体等几何形状的周长、面积、体积、表面积等属性"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>长、宽、高</div>

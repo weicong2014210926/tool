@@ -54,10 +54,8 @@ export default function SolarTerms() {
       toolId="date-solar-terms"
       title="二十四节气速查表"
       description="快速查询全年二十四节气的具体日期时间"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={{ marginBottom: 20 }}>
         <div style={labelStyle}>选择年份</div>

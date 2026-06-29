@@ -55,10 +55,8 @@ export default function BankCode() {
       toolId="fin-bank-code"
       title="银行联行号查询"
       description="查询全国各大银行的联行号(CNAPS)信息"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>搜索银行</div>

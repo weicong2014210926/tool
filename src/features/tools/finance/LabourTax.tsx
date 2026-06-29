@@ -41,10 +41,8 @@ export default function LabourTax() {
       toolId="fin-labour-tax"
       title="劳务报酬所得税计算"
       description="计算劳务报酬所得应缴纳的个人所得税，适用于兼职和自由职业者"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>劳务报酬收入</div>

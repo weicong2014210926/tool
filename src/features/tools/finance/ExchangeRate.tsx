@@ -59,10 +59,8 @@ export default function ExchangeRate() {
       toolId="fin-exchange-rate"
       title="货币汇率换算"
       description="支持全球主要货币之间的汇率查询和金额换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入金额</div>

@@ -51,10 +51,8 @@ export default function IncomeTax() {
       toolId="fin-income-tax"
       title="个人所得税计算器"
       description="根据2024年中国税法计算个人所得税，支持专项附加扣除"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>月薪（税前）</div>

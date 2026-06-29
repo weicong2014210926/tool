@@ -130,10 +130,8 @@ export default function Crontab() {
       toolId="dev-crontab"
       title="crontab执行时间计算"
       description="解析crontab表达式，计算并展示任务的下次执行时间列表"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>Crontab 表达式</div>

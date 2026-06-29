@@ -78,10 +78,8 @@ export default function CurrencyList() {
       toolId="fin-currency-list"
       title="世界各国货币查询"
       description="查询世界各国使用的货币名称、货币代码和货币符号"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>搜索货币</div>

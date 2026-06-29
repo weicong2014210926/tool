@@ -89,10 +89,8 @@ export default function Retirement() {
       toolId="date-retirement"
       title="退休年龄计算器"
       description="根据当前退休政策计算法定退休年龄和退休时间（参考2025年新政策）"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>基本信息</div>

@@ -57,10 +57,8 @@ export default function CheckDate() {
       toolId="fin-check-date"
       title="支票日期大写转换"
       description="将日期转换为支票填写所需的中文大写日期格式"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>选择日期</div>

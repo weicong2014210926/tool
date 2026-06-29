@@ -40,10 +40,8 @@ export default function Weight() {
       toolId="conv-weight"
       title="重量单位换算"
       description="在千克、克、吨、磅、盎司、斤、两等重量单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

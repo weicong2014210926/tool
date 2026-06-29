@@ -49,10 +49,8 @@ export default function DateCalc() {
       toolId="date-calc"
       title="日期时间计算器"
       description="计算日期间隔天数、推算未来日期等日期相关操作"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       {/* Date Difference */}
       <div style={sectionStyle}>

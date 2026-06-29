@@ -38,10 +38,8 @@ export default function Regex() {
       toolId="dev-regex"
       title="正则表达式测试"
       description="在线测试正则表达式，实时显示匹配结果和分组详情"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>正则表达式</div>

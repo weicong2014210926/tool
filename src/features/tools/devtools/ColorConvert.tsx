@@ -155,10 +155,8 @@ export default function ColorConvert() {
       toolId="dev-color-convert"
       title="颜色值转换"
       description="在HEX、RGB、HSL、HSV等颜色格式之间进行转换，支持颜色预览"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入颜色值</div>

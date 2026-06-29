@@ -61,10 +61,8 @@ export default function Stopwatch() {
       toolId="date-stopwatch"
       title="在线秒表"
       description="提供在线秒表计时功能，支持开始、暂停、计次和复位操作"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={timeStyle}>{fmt(time)}</div>
       <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 20 }}>

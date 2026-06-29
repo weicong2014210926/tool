@@ -45,10 +45,8 @@ export default function RandomDate() {
       toolId="date-random"
       title="随机日期时间生成"
       description="在指定范围内随机生成日期或时间，适用于测试数据和模拟场景"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>日期范围 & 数量</div>

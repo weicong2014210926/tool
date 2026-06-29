@@ -57,10 +57,8 @@ export default function Holiday() {
       toolId="date-holiday"
       title="年度放假安排"
       description="查看年度法定节假日的放假和调休安排"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={{ marginBottom: 20 }}>
         <div style={labelStyle}>选择年份</div>

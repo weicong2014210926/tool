@@ -44,10 +44,8 @@ export default function Byte() {
       toolId="conv-byte"
       title="字节单位换算"
       description="在字节、KB、MB、GB、TB、PB等数据存储单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>换算标准</div>

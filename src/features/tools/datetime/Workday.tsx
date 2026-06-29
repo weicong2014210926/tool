@@ -50,10 +50,8 @@ export default function Workday() {
       toolId="date-workday"
       title="工作日计算器"
       description="计算两个日期之间的工作日天数，支持自定义假期排除"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>日期范围</div>

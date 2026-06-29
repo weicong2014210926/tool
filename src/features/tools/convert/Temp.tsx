@@ -63,10 +63,8 @@ export default function Temp() {
       toolId="conv-temp"
       title="温度单位换算"
       description="在摄氏度、华氏度、开尔文等温度单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>

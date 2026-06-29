@@ -59,10 +59,8 @@ export default function WorldTime() {
       toolId="date-world-time"
       title="世界时间转换"
       description="查看全球各时区的当前时间"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue=""
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 8, fontFamily: 'var(--font-sans)' }}>

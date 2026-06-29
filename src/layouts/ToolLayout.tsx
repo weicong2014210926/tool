@@ -174,26 +174,28 @@ export interface ToolLayoutProps {
   toolId: string;
   title: string;
   description: string;
-  inputValue: string;
-  onInputChange: (value: string) => void;
+  inputValue?: string;
+  onInputChange?: (value: string) => void;
   outputValue: string;
   inputPlaceholder?: string;
   error?: string;
   children?: ReactNode; // extra content between input and output
   extraActions?: ReactNode; // extra action buttons
+  hideInput?: boolean; // hide the built-in textarea (when tool has own inputs)
 }
 
 export default function ToolLayout({
   toolId,
   title,
   description,
-  inputValue,
-  onInputChange,
+  inputValue = '',
+  onInputChange = () => {},
   outputValue,
   inputPlaceholder = '在此粘贴或输入内容...',
   error,
   children,
   extraActions,
+  hideInput,
 }: ToolLayoutProps) {
   const navigate = useNavigate();
   const { copied, copy } = useCopyToClipboard();
@@ -248,13 +250,14 @@ export default function ToolLayout({
       </div>
 
       {/* Input Section */}
+      {!hideInput && inputValue !== undefined && (
       <div style={sectionStyle}>
         <div style={labelStyle}>输入</div>
         <textarea
           style={textareaBase}
           placeholder={inputPlaceholder}
           value={inputValue}
-          onChange={(e) => onInputChange(e.target.value)}
+          onChange={(e) => onInputChange?.(e.target.value)}
           onFocus={(e) => {
             Object.assign(e.target.style, textareaFocusStyle);
           }}
@@ -264,6 +267,7 @@ export default function ToolLayout({
         />
         {error && <div style={errorStyle}>{error}</div>}
       </div>
+      )}
 
       {/* Action Bar */}
       <div style={actionBarStyle}>
@@ -274,9 +278,11 @@ export default function ToolLayout({
         >
           {copied ? '✓ 已复制' : '📋 一键复制'}
         </button>
+        {!hideInput && (
         <button style={btnBase} onClick={handleClear}>
           🗑 一键清空
         </button>
+        )}
         {extraActions}
       </div>
 

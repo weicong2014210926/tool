@@ -128,8 +128,7 @@ export default function Guid() {
       toolId="codec-guid"
       title="GUID生成工具"
       description="批量生成全局唯一标识符GUID/UUID，使用 crypto.randomUUID() 生成标准UUID v4"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
       children={controls}
     />

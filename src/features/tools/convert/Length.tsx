@@ -51,10 +51,8 @@ export default function Length() {
       toolId="conv-length"
       title="长度单位换算"
       description="在米、千米、英里、英尺、英寸等常见长度单位之间进行换算"
-      inputValue=""
-      onInputChange={() => {}}
+      hideInput
       outputValue={output}
-      inputPlaceholder=""
     >
       <div style={sectionStyle}>
         <div style={labelStyle}>输入值</div>
