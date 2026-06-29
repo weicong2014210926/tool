@@ -85,7 +85,7 @@ export default function Regex() {
               <div style={statValue}>{result.count}</div>
             </div>
           </div>
-          {result.matches.map((m) => (
+          {(result.matches ?? []).map((m: any) => (
             <div key={m.index} style={{ padding: '8px 12px', borderRadius: 10, border: '1px solid var(--border-light)', background: 'var(--bg-tool)', marginBottom: 6, fontSize: 12, fontFamily: '"Fira Code", monospace', color: 'var(--text-primary)' }}>
               <div style={{ fontWeight: 600, color: 'var(--color-blue)', marginBottom: 4 }}>
                 匹配 #{m.index} (位置 {m.position})
@@ -93,7 +93,7 @@ export default function Regex() {
               <div style={{ marginBottom: 4 }}>全文: {m.full}</div>
               {m.groups.length > 0 && (
                 <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
-                  {m.groups.map((g, gi) => <div key={gi}>{g}</div>)}
+                  {m.groups.map((g: string, gi: number) => <div key={gi}>{g}</div>)}
                 </div>
               )}
             </div>

@@ -214,7 +214,11 @@ export default function HomePage() {
     const seen = new Set<string>();
     return history
       .map((id) => getToolById(id))
-      .filter((t): t is ToolEntry => !!t && !seen.has(t.id) && seen.add(t.id))
+      .filter((t): t is ToolEntry => {
+        if (!t || seen.has(t.id)) return false;
+        seen.add(t.id);
+        return true;
+      })
       .slice(0, 10);
   }, [history]);
 
