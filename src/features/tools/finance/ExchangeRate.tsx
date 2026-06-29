@@ -9,20 +9,23 @@ const resultStyle: React.CSSProperties = { fontSize: 20, fontWeight: 700, color:
 const noteStyle: React.CSSProperties = { fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-sans)', marginTop: 8, textAlign: 'center' };
 
 // Hardcoded approximate rates (vs CNY)
-const rates: Record<string, number> = {
-  CNY: 1,
-  USD: 7.25,
-  EUR: 7.85,
-  GBP: 9.20,
-  JPY: 0.048,
-  KRW: 0.0053,
-  HKD: 0.93,
-  AUD: 4.80,
-  CAD: 5.30,
-  CHF: 8.15,
+const currencyInfo: Record<string, { name: string; rate: number; symbol: string }> = {
+  CNY: { name: '人民币', rate: 1, symbol: '¥' },
+  USD: { name: '美元', rate: 7.25, symbol: '$' },
+  EUR: { name: '欧元', rate: 7.85, symbol: '€' },
+  GBP: { name: '英镑', rate: 9.20, symbol: '£' },
+  JPY: { name: '日元', rate: 0.048, symbol: '¥' },
+  KRW: { name: '韩元', rate: 0.0053, symbol: '₩' },
+  HKD: { name: '港币', rate: 0.93, symbol: 'HK$' },
+  AUD: { name: '澳元', rate: 4.80, symbol: 'A$' },
+  CAD: { name: '加元', rate: 5.30, symbol: 'C$' },
+  CHF: { name: '瑞士法郎', rate: 8.15, symbol: 'CHF' },
 };
 
-const currencies = Object.keys(rates);
+const getCurrencyLabel = (code: string) => {
+  const info = currencyInfo[code];
+  return info ? `${info.name} (${code} ${info.symbol})` : code;
+};
 
 export default function ExchangeRate() {
   const [amount, setAmount] = useState('');
@@ -35,18 +38,19 @@ export default function ExchangeRate() {
     if (!val) { setOutput(''); setRateUsed(''); return; }
     const n = parseFloat(val);
     if (isNaN(n) || n < 0) { setOutput(''); setRateUsed(''); return; }
-    const inCny = n * rates[f];
-    const targetRate = rates[t];
+    const inCny = n * currencyInfo[f].rate;
+    const targetRate = currencyInfo[t].rate;
     const result = inCny / targetRate;
-    setOutput(result.toFixed(4));
+    const fmt = result.toLocaleString('zh-CN', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+    setOutput(fmt);
     if (f === t) {
       setRateUsed('同币种转换');
     } else if (f === 'CNY') {
-      setRateUsed(`1 ${t} = ${(rates['CNY'] / rates[t]).toFixed(4)} CNY`);
+      setRateUsed(`1 ${getCurrencyLabel(t)} = ${(currencyInfo['CNY'].rate / currencyInfo[t].rate).toFixed(4)} ${getCurrencyLabel('CNY')}`);
     } else if (t === 'CNY') {
-      setRateUsed(`1 ${f} = ${rates[f].toFixed(4)} CNY`);
+      setRateUsed(`1 ${getCurrencyLabel(f)} = ${currencyInfo[f].rate.toFixed(4)} ${getCurrencyLabel('CNY')}`);
     } else {
-      setRateUsed(`1 ${f} = ${(rates[f] / rates[t]).toFixed(4)} ${t}`);
+      setRateUsed(`1 ${getCurrencyLabel(f)} = ${(currencyInfo[f].rate / currencyInfo[t].rate).toFixed(4)} ${getCurrencyLabel(t)}`);
     }
   }, []);
 
@@ -70,17 +74,17 @@ export default function ExchangeRate() {
         <div style={labelStyle}>从 → 到</div>
         <div style={rowStyle}>
           <select style={inputStyle} value={from} onChange={e => handleFrom(e.target.value)}>
-            {currencies.map(c => <option key={c} value={c}>{c}</option>)}
+            {Object.keys(currencyInfo).map(c => <option key={c} value={c}>{getCurrencyLabel(c)}</option>)}
           </select>
           <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>→</span>
           <select style={inputStyle} value={to} onChange={e => handleTo(e.target.value)}>
-            {currencies.map(c => <option key={c} value={c}>{c}</option>)}
+            {Object.keys(currencyInfo).map(c => <option key={c} value={c}>{getCurrencyLabel(c)}</option>)}
           </select>
         </div>
       </div>
       {output && (
         <>
-          <div style={resultStyle}>{amount} {from} = {output} {to}</div>
+          <div style={resultStyle}>{amount} {getCurrencyLabel(from)} = {output} {getCurrencyLabel(to)}</div>
           <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 13, marginTop: 6 }}>汇率: {rateUsed}</div>
         </>
       )}
