@@ -61,7 +61,7 @@
   --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Font */
-  --font-sans: 'Nunito', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
 }
 
 /* ---------- Dark Theme ---------- */
