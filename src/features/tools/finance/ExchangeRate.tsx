@@ -46,14 +46,9 @@ export default function ExchangeRate() {
     if (f === t) {
       setRateUsed('同币种转换');
     } else {
-      // 当 f 为 CNY 时，显示 1 t = ? CNY；否则显示 1 f = ? CNY
-      if (f === 'CNY') {
-        const rate = currencyInfo['CNY'].rate / currencyInfo[t].rate;
-        setRateUsed(`1 ${getCurrencyLabel(t)} = ${rate.toFixed(4)} ${getCurrencyLabel('CNY')}`);
-      } else {
-        const rate = currencyInfo[f].rate;
-        setRateUsed(`1 ${getCurrencyLabel(f)} = ${rate.toFixed(4)} ${getCurrencyLabel('CNY')}`);
-      }
+      // 始终显示 1 源货币 = ? 目标货币
+      const crossRate = currencyInfo[f].rate / currencyInfo[t].rate;
+      setRateUsed(`1 ${getCurrencyLabel(f)} = ${crossRate.toFixed(4)} ${getCurrencyLabel(t)}`);
     }
   }, []);
 
